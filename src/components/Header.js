@@ -7,7 +7,7 @@ function Header() {
     <>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">GABORAS</Navbar.Brand>
+          <Navbar.Brand href="/">GABORAS</Navbar.Brand>
           <Nav className="me-auto">
             <NavDropdown title="Piyasa" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#piyasa1">Piyasa1</NavDropdown.Item>
