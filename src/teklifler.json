@@ -1,0 +1,29 @@
+{
+    "teklifler": [
+        {
+            "id": 1,
+            "gonderen": "Mustafa Durmaz",
+            "email": "mdmz_001@hotmail.com",
+            "tel": "05536195025",
+            "date": "24.02.2022",
+            "tutar": 100000
+        },
+        {
+            "id": 1,
+            "gonderen": "Mehmet Durmaz",
+            "email": "mdmz_001@hotmail.com",
+            "tel": "05536195025",
+            "date": "26.02.2022",
+            "tutar": 100000
+        },
+        {
+            "id": 2,
+            "gonderen": "Ahmet Durmaz",
+            "email": "mdmz_001@hotmail.com",
+            "tel": "05536195025",
+            "date": "",
+            "tutar": 100000
+        }
+        
+    ]
+}

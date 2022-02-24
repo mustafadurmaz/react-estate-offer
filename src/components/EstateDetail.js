@@ -1,9 +1,12 @@
 import React from "react";
-import { Container, Card, Button, Row, Col, Table } from "react-bootstrap";
+import { Container, Card, Button, Row, Col, Table,Nav } from "react-bootstrap";
 import { useParams, useRouteMatch } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import { timeConverter, binlik } from "./functions";
-import { Carousel } from "react-carousel-minimal";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import Offers from "./Offers";
+import Form from "./Form";
 
 function EstateDetail({ data, setIsActive }) {
   const params = useParams();
@@ -13,7 +16,7 @@ function EstateDetail({ data, setIsActive }) {
   console.log(data);
 
   const dataList = data.estateList.filter((estate) => estate.id == params.id);
-  console.log(dataList[0].category);
+  console.log(dataList[0]);
 
   if (params) {
     setIsActive(false);
@@ -24,17 +27,21 @@ function EstateDetail({ data, setIsActive }) {
   const d = new Date();
   let year = d.getFullYear();
 
+  // const imageData = [
+  //   { image: dataList[0].img1 },
+  //   { image: dataList[0].img2 },
+  //   { image: dataList[0].img3 },
+  //   { image: dataList[0].img4 },
+  //   { image: dataList[0].img5 },
+  // ];
   const imageData = [
-    { image: dataList[0].img1 },
-    { image: dataList[0].img2 },
-    { image: dataList[0].img3 },
-    { image: dataList[0].img4 },
-    { image: dataList[0].img5 },
+    dataList[0].img1,
+    dataList[0].img2,
+    dataList[0].img3,
+    dataList[0].img4,
+    dataList[0].img5,
   ];
-  const slideNumberStyle = {
-    fontSize: '20px',
-    fontWeight: 'bold',
-  }
+
   console.log(imageData);
 
   return (
@@ -49,9 +56,10 @@ function EstateDetail({ data, setIsActive }) {
               {dataList[0].type} <IoMdArrowDropright />
               {dataList[0].subcategory}
             </Card.Text>
-            <Button className="float-end rounded-pill" variant="primary">
+            {/* <Button className="float-end rounded-pill" variant="primary">
               Teklif Gönder
-            </Button>
+            </Button> */}
+            <Form />
             <Card.Title>
               {dataList[0].neighborhood} {dataList[0].room}{" "}
               {dataList[0].room && <span>Odalı</span>} {dataList[0].type}{" "}
@@ -161,39 +169,29 @@ function EstateDetail({ data, setIsActive }) {
             </Table>
           </Col>
           <Col sm={8}>
-            <div
-              style={{
-                padding: "0 20px",
-              }}
-            >
-              <Carousel
-                data={imageData}
-                // time={20000}
-                width="850px"
-                height="500px"
-                radius="10px"
-                slideNumber={true}
-                slideNumberStyle={slideNumberStyle}
-                captionPosition="bottom"
-                // automatic={true}
-                dots={true}
-                pauseIconColor="white"
-                pauseIconSize="40px"
-                slideBackgroundColor="darkgrey"
-                slideImageFit="cover"
-                thumbnails={true}
-                thumbnailWidth="100px"
-                style={{
-                  textAlign: "center",
-                  maxWidth: "850px",
-                  maxHeight: "500px",
-                  margin: "40px auto",
-                }}
-              />
-            </div>
+            <Carousel>
+              {imageData.map((image) => (
+                <div key={image}>
+                  <img src={image} />
+                  {/* <p className="legend">Legend 1</p> */}
+                </div>
+              ))}
+            </Carousel>
           </Col>
         </Row>
       </Container>
+      <Container>
+        <Nav variant="pills" defaultActiveKey="/home">
+          <Nav.Item>
+            <Nav.Link href="/home">TEKLİFLER</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-1">KONUM</Nav.Link>
+          </Nav.Item>
+ 
+        </Nav>
+      </Container>
+      <Offers params={params} />
     </>
   );
 }
