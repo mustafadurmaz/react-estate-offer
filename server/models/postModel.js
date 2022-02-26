@@ -1,18 +1,18 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
     id: Number,
     name: String,
     surname: String,
     email: String,
-    tel: Number,
+    tel: String,
     tutar: Number,
     createdAt: {
         type: Date,
-        default: new Date(),
+        default: Date.now,
     },
 })
 
-var PostForm = mongoose.model('PostForm', postSchema);
+var PostModel = mongoose.model('PostModel', postSchema);
 
-export default PostForm;
+module.exports = PostModel;

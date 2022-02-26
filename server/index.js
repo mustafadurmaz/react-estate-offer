@@ -1,20 +1,38 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-
+const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const PostModel = require("./models/postModel");
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+const cors = require("cors");
+
+app.use(express.json());
 app.use(cors());
 
-// app.use('/posts', postRoutes);
+mongoose.connect(
+  "mongodb+srv://mdurmaz:sason123@cluster0.kzyvo.mongodb.net/estatedb?retryWrites=true&w=majority"
+);
 
-const mongoURL = 'mongodb+srv://mdurmaz:sason123@cluster0.kzyvo.mongodb.net/estatedb?retryWrites=true&w=majority';
-const PORT = process.env.PORT|| 5000;
+app.get("/getoffers", (req, res) => {
+  PostModel.find({}, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
 
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
-  .catch((error) => console.log(`${error} did not connect`));
+app.post("/createoffer", async (req, res) => {
+  PostModel.create(req.body, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
 
+app.listen(3001, () => {
+  console.log("SERVER RUNS PERFECTLY!");
+});

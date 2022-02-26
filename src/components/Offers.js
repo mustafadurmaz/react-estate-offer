@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
-import offerData from "../teklifler.json";
+import {binlik} from "./functions";
+import { formatDate } from "./functions";
 
-function Offers({ params }) {
-  const offerList = offerData.teklifler.filter(
-    (teklif) => teklif.id == params.id
-  );
+function Offers({ params, offerList }) {
   console.log(offerList);
   return (
     <>
@@ -23,11 +21,13 @@ function Offers({ params }) {
           {offerList.map((offer) => (
             <tbody>
               <tr>
-                <td>{offer.gonderen}</td>
+                <td>
+                  {offer.name} {offer.surname}
+                </td>
                 <td>{offer.email}</td>
                 <td>{offer.tel}</td>
-                <td>{offer.date}</td>
-                <td>{offer.tutar}</td>
+                <td>{formatDate(new Date(`${offer.createdAt}`))}</td>
+                <td>{binlik(offer.tutar)}₺</td>
               </tr>
             </tbody>
           ))}

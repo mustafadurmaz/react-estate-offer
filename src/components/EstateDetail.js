@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Container, Card, Button, Row, Col, Table,Nav } from "react-bootstrap";
 import { useParams, useRouteMatch } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
@@ -7,16 +7,32 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import Offers from "./Offers";
 import Form from "./Form";
+import axios from "axios";
 
 function EstateDetail({ data, setIsActive }) {
+  const [listOffer, setListOffer] = useState([]);
   const params = useParams();
-  console.log(params);
-  const match = useRouteMatch();
-  console.log(match);
-  console.log(data);
 
+  listOffer.sort(function(a,b){
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  const offerList = listOffer.filter(
+    (teklif) => teklif.id == params.id
+  );
+  
+ 
+  const match = useRouteMatch();
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/getoffers").then((response) => {
+      setListOffer(response.data);
+      
+    });
+    
+  }, []);
   const dataList = data.estateList.filter((estate) => estate.id == params.id);
-  console.log(dataList[0]);
+
 
   if (params) {
     setIsActive(false);
@@ -27,13 +43,6 @@ function EstateDetail({ data, setIsActive }) {
   const d = new Date();
   let year = d.getFullYear();
 
-  // const imageData = [
-  //   { image: dataList[0].img1 },
-  //   { image: dataList[0].img2 },
-  //   { image: dataList[0].img3 },
-  //   { image: dataList[0].img4 },
-  //   { image: dataList[0].img5 },
-  // ];
   const imageData = [
     dataList[0].img1,
     dataList[0].img2,
@@ -42,7 +51,7 @@ function EstateDetail({ data, setIsActive }) {
     dataList[0].img5,
   ];
 
-  console.log(imageData);
+
 
   return (
     <>
@@ -59,7 +68,7 @@ function EstateDetail({ data, setIsActive }) {
             {/* <Button className="float-end rounded-pill" variant="primary">
               Teklif Gönder
             </Button> */}
-            <Form />
+            <Form params={params} offerList={offerList} />
             <Card.Title>
               {dataList[0].neighborhood} {dataList[0].room}{" "}
               {dataList[0].room && <span>Odalı</span>} {dataList[0].type}{" "}
@@ -191,7 +200,7 @@ function EstateDetail({ data, setIsActive }) {
  
         </Nav>
       </Container>
-      <Offers params={params} />
+      <Offers params={params} offerList={offerList} />
     </>
   );
 }
