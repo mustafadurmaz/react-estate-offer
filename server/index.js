@@ -37,20 +37,20 @@ app.post("/createoffer", async (req, res) => {
 
 let lastOffer = "";
 io.on("connection", (socket) => {
-	console.log("bir kullanıcı bağlandı!");
+  console.log("bir kullanıcı bağlandı!");
 
-	socket.emit("receive", lastOffer);
+  socket.emit("receive", lastOffer);
 
-	socket.on("newOffer", (offer) => {
-		console.log(offer);
+  socket.on("newOffer", (offer) => {
+    console.log(offer);
 
-		lastOffer = offer;
-		io.emit("receive", offer);
-	});
+    lastOffer = offer;
+    io.emit("receive", offer);
+  });
 
-	socket.on("disconnect", () => {
-		console.log("Bir kullanıcı ayrıldı.");
-	});
+  socket.on("disconnect", () => {
+    console.log("Bir kullanıcı ayrıldı.");
+  });
 });
 
 http.listen(3001, () => console.log("Server run"));

@@ -1,14 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./Form.css";
 import axios from "axios";
-import {binlik} from "./functions";
+import { binlik } from "./functions";
 // import { init,send } from "../socketApi";
 
-
-function Form({ params,offerList}) {
-  
+function Form({ params, offerList }) {
   const [form, setForm] = useState({
     name: "",
     surname: "",
@@ -17,14 +15,13 @@ function Form({ params,offerList}) {
     tutar: "",
   });
 
-
   const handleChange = (event) => {
     setForm({
       ...form,
       [event.target.name]: event.target.value,
     });
   };
- console.log(offerList);
+  console.log(offerList);
   const handleSubmit = (e) => {
     const offerObject = {
       id: params.id,
@@ -35,27 +32,21 @@ function Form({ params,offerList}) {
       tutar: form.tutar,
     };
 
-   
-    
-
     if (offerObject.tutar <= offerList[0]?.tutar) {
-      alert(`Lütfen ${binlik(offerList[0].tutar)}₺'den daha büyük bir değer girin`);
+      alert(
+        `Lütfen ${binlik(offerList[0].tutar)}₺'den daha büyük bir değer girin`
+      );
     } else {
       axios
         .post("http://localhost:3001/createoffer", offerObject)
-        .then((res) => {
-          
-        })
+        .then((res) => {})
         .catch((error) => {
           console.log(error);
         });
       window.location.reload(true);
-      
     }
-    
   };
 
-  
   return (
     <div className="App">
       <div class="container">

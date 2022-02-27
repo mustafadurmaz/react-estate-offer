@@ -34,11 +34,16 @@ function EstateDetail({ data, setIsActive }) {
   }, []);
   const dataList = data.estateList.filter((estate) => estate.id === Number(params.id));
 
-  if (params) {
-    setIsActive(false);
-  } else {
-    setIsActive(true);
+  useEffect(()=>{
+    if (params) {
+      setIsActive(false);
+    } 
+
+    return () => {
+      setIsActive(true);
   }
+    
+  },[]);
 
   const d = new Date();
   let year = d.getFullYear();
@@ -187,7 +192,7 @@ function EstateDetail({ data, setIsActive }) {
       <Container>
         <Nav variant="pills" defaultActiveKey="/home">
           <Nav.Item>
-            <Nav.Link href="/home">TEKLİFLER</Nav.Link>
+            <Nav.Link href="#">TEKLİFLER</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="link-1">KONUM</Nav.Link>

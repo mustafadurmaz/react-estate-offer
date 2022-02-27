@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
-import {binlik} from "./functions";
+import { binlik } from "./functions";
 import { formatDate } from "./functions";
 
-
 function Offers({ params, offerList }) {
-  
-
   return (
     <>
       <Container className="mt-5">
