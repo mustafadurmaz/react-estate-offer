@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
-import { Container, Card, Button, Row, Col, Table,Nav } from "react-bootstrap";
-import { useParams, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Container, Card, Row, Col, Table, Nav } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import { timeConverter, binlik } from "./functions";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -8,31 +8,31 @@ import { Carousel } from "react-responsive-carousel";
 import Offers from "./Offers";
 import Form from "./Form";
 import axios from "axios";
+import { init, send, subscribe } from "../socketApi";
 
 function EstateDetail({ data, setIsActive }) {
-  const [listOffer, setListOffer] = useState([]);
+  // const [listOffer, setListOffer] = useState([]);
+  const [socketData, setSocketData] = useState([]);
   const params = useParams();
 
-  listOffer.sort(function(a,b){
+  socketData.sort(function (a, b) {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
-  const offerList = listOffer.filter(
-    (teklif) => teklif.id == params.id
-  );
-  
- 
-  const match = useRouteMatch();
+  const offerList = socketData.filter((teklif) => teklif.id === Number(params.id));
 
   useEffect(() => {
     axios.get("http://localhost:3001/getoffers").then((response) => {
-      setListOffer(response.data);
-      
-    });
-    
-  }, []);
-  const dataList = data.estateList.filter((estate) => estate.id == params.id);
+      setSocketData(response.data);
+      init();
 
+      send(response.data);
+      subscribe((offer) => {
+        setSocketData(offer);
+      });
+    });
+  }, []);
+  const dataList = data.estateList.filter((estate) => estate.id === Number(params.id));
 
   if (params) {
     setIsActive(false);
@@ -51,8 +51,6 @@ function EstateDetail({ data, setIsActive }) {
     dataList[0].img5,
   ];
 
-
-
   return (
     <>
       <Container>
@@ -65,9 +63,7 @@ function EstateDetail({ data, setIsActive }) {
               {dataList[0].type} <IoMdArrowDropright />
               {dataList[0].subcategory}
             </Card.Text>
-            {/* <Button className="float-end rounded-pill" variant="primary">
-              Teklif Gönder
-            </Button> */}
+
             <Form params={params} offerList={offerList} />
             <Card.Title>
               {dataList[0].neighborhood} {dataList[0].room}{" "}
@@ -181,8 +177,7 @@ function EstateDetail({ data, setIsActive }) {
             <Carousel>
               {imageData.map((image) => (
                 <div key={image}>
-                  <img src={image} />
-                  {/* <p className="legend">Legend 1</p> */}
+                  <img src={image} alt={image} />
                 </div>
               ))}
             </Carousel>
@@ -197,7 +192,6 @@ function EstateDetail({ data, setIsActive }) {
           <Nav.Item>
             <Nav.Link eventKey="link-1">KONUM</Nav.Link>
           </Nav.Item>
- 
         </Nav>
       </Container>
       <Offers params={params} offerList={offerList} />

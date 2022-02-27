@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const PostModel = require("./models/postModel");
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 const cors = require("cors");
 
@@ -33,6 +35,22 @@ app.post("/createoffer", async (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log("SERVER RUNS PERFECTLY!");
+let lastOffer = "";
+io.on("connection", (socket) => {
+	console.log("bir kullanıcı bağlandı!");
+
+	socket.emit("receive", lastOffer);
+
+	socket.on("newOffer", (offer) => {
+		console.log(offer);
+
+		lastOffer = offer;
+		io.emit("receive", offer);
+	});
+
+	socket.on("disconnect", () => {
+		console.log("Bir kullanıcı ayrıldı.");
+	});
 });
+
+http.listen(3001, () => console.log("Server run"));

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./Form.css";
 import axios from "axios";
 import {binlik} from "./functions";
+// import { init,send } from "../socketApi";
+
 
 function Form({ params,offerList}) {
+  
   const [form, setForm] = useState({
     name: "",
     surname: "",
@@ -14,7 +17,6 @@ function Form({ params,offerList}) {
     tutar: "",
   });
 
-  console.log(params);
 
   const handleChange = (event) => {
     setForm({
@@ -33,19 +35,24 @@ function Form({ params,offerList}) {
       tutar: form.tutar,
     };
 
+   
+    
+
     if (offerObject.tutar <= offerList[0]?.tutar) {
       alert(`Lütfen ${binlik(offerList[0].tutar)}₺'den daha büyük bir değer girin`);
     } else {
       axios
         .post("http://localhost:3001/createoffer", offerObject)
         .then((res) => {
-          console.log(res.data);
+          
         })
         .catch((error) => {
           console.log(error);
         });
       window.location.reload(true);
+      
     }
+    
   };
 
   
@@ -92,6 +99,7 @@ function Form({ params,offerList}) {
                       value={form.name}
                       placeholder="Ad"
                       onChange={handleChange}
+                      required
                     />
 
                     <input
@@ -102,6 +110,7 @@ function Form({ params,offerList}) {
                       value={form.surname}
                       placeholder="Soyad"
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div class="mb-3 d-flex justify-content-around">
@@ -123,6 +132,7 @@ function Form({ params,offerList}) {
                       value={form.tel}
                       placeholder="Cep Telefonu"
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div class="mb-3 d-flex justify-content-around">

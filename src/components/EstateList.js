@@ -1,15 +1,11 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
+import { Container, Row, Card, Badge } from "react-bootstrap";
 
 import "./EstateList.css";
 import { Link } from "react-router-dom";
-import {binlik} from "./functions";
+import { binlik } from "./functions";
 
-function EstateList({data}) {
-
-
-  // console.log(data.estateList);
-
+function EstateList({ data }) {
   return (
     <>
       <Container>

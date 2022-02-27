@@ -3,8 +3,10 @@ import { Container, Table } from "react-bootstrap";
 import {binlik} from "./functions";
 import { formatDate } from "./functions";
 
+
 function Offers({ params, offerList }) {
-  console.log(offerList);
+  
+
   return (
     <>
       <Container className="mt-5">
