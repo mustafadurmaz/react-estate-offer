@@ -180,7 +180,7 @@ function EstateDetail({ data, setIsActive }) {
           </Col>
           <Col sm={8}>
             <Carousel>
-              {imageData.map((image) => (
+              {imageData.map((image,index) => (
                 <div key={image}>
                   <img src={image} alt={image} />
                 </div>

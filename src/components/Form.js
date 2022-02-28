@@ -21,7 +21,7 @@ function Form({ params, offerList }) {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(offerList);
+  
   const handleSubmit = (e) => {
     const offerObject = {
       id: params.id,
@@ -49,10 +49,10 @@ function Form({ params, offerList }) {
 
   return (
     <div className="App">
-      <div class="container">
+      <div className="container">
         <button
           type="button"
-          class="btn btn-primary float-end rounded-pill"
+          className="btn btn-primary float-end rounded-pill"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
@@ -60,32 +60,32 @@ function Form({ params, offerList }) {
         </button>
 
         <div
-          class="modal fade"
+          className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-secondary" id="exampleModalLabel">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title text-secondary" id="exampleModalLabel">
                   İletişim Bilgileri
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <form className="teklifForm">
-                  <div class="mb-3 d-flex justify-content-around">
+                  <div className="mb-3 d-flex justify-content-around">
                     <input
-                      class="min-vw-45 p-1 rounded-pill"
+                      className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                      class="form-control"
+                  
                       name="name"
                       value={form.name}
                       placeholder="Ad"
@@ -94,9 +94,9 @@ function Form({ params, offerList }) {
                     />
 
                     <input
-                      className="min-vw-45 p-1 rounded-pill"
+                      className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                      class="form-control"
+               
                       name="surname"
                       value={form.surname}
                       placeholder="Soyad"
@@ -104,11 +104,11 @@ function Form({ params, offerList }) {
                       required
                     />
                   </div>
-                  <div class="mb-3 d-flex justify-content-around">
+                  <div className="mb-3 d-flex justify-content-around">
                     <input
-                      className="min-vw-45 p-1 rounded-pill"
+                      className="min-vw-45 p-1 rounded-pill form-control"
                       type="email"
-                      class="form-control"
+             
                       name="email"
                       value={form.email}
                       placeholder="Eposta Adresi"
@@ -116,9 +116,9 @@ function Form({ params, offerList }) {
                     />
 
                     <input
-                      className="min-vw-45 p-1 rounded-pill"
+                      className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                      class="form-control"
+                   
                       name="tel"
                       value={form.tel}
                       placeholder="Cep Telefonu"
@@ -126,11 +126,11 @@ function Form({ params, offerList }) {
                       required
                     />
                   </div>
-                  <div class="mb-3 d-flex justify-content-around">
+                  <div className="mb-3 d-flex justify-content-around">
                     <input
-                      className="min-vw-45 p-1 rounded-pill"
+                      className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                      class="form-control"
+                 
                       name="tutar"
                       value={form.tutar}
                       placeholder="Teklif Tutarı"
@@ -139,10 +139,10 @@ function Form({ params, offerList }) {
                   </div>
                 </form>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="submit"
-                  class="btn btn-primary rounded-pill"
+                  className="btn btn-primary rounded-pill"
                   data-bs-dismiss="modal"
                   onClick={handleSubmit}
                 >

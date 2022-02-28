@@ -18,7 +18,7 @@ function Offers({ params, offerList }) {
             </tr>
           </thead>
           {offerList.map((offer) => (
-            <tbody>
+            <tbody key={offer._id}>
               <tr>
                 <td>
                   {offer.name} {offer.surname}
