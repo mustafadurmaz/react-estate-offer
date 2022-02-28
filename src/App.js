@@ -1,4 +1,4 @@
-import "./App.css";
+
 import EstateList from "./components/EstateList";
 import Header from "./components/Header";
 import {

@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { Container, Table } from "react-bootstrap";
+import React from "react";
+import { Container } from "react-bootstrap";
 import { binlik } from "./functions";
 import { formatDate } from "./functions";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
-function Offers({ params, offerList }) {
+function Offers({ offerList }) {
   return (
     <>
       <Container className="mt-5">
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>Gönderen</th>
-              <th>Email</th>
-              <th>Telefon</th>
-              <th>Teklif Tarihi</th>
-              <th>Gelen Teklif Tutarı</th>
-            </tr>
-          </thead>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>Gönderen</Th>
+              <Th>Email</Th>
+              <Th>Telefon</Th>
+              <Th>Teklif Tarihi</Th>
+              <Th>Gelen Teklif Tutarı</Th>
+            </Tr>
+          </Thead>
           {offerList.map((offer) => (
-            <tbody key={offer._id}>
-              <tr>
-                <td>
+            <Tbody key={offer._id}>
+              <Tr>
+                <Td>
                   {offer.name} {offer.surname}
-                </td>
-                <td>{offer.email}</td>
-                <td>{offer.tel}</td>
-                <td>{formatDate(new Date(`${offer.createdAt}`))}</td>
-                <td>{binlik(offer.tutar)}₺</td>
-              </tr>
-            </tbody>
+                </Td>
+                <Td>{offer.email}</Td>
+                <Td>{offer.tel}</Td>
+                <Td>{formatDate(new Date(`${offer.createdAt}`))}</Td>
+                <Td>{binlik(offer.tutar)}₺</Td>
+              </Tr>
+            </Tbody>
           ))}
         </Table>
       </Container>

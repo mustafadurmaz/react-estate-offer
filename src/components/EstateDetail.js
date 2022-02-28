@@ -190,7 +190,7 @@ function EstateDetail({ data, setIsActive }) {
         </Row>
       </Container>
       <Container>
-        <Nav variant="pills" defaultActiveKey="/home">
+        <Nav variant="pills" defaultActiveKey="#">
           <Nav.Item>
             <Nav.Link href="#">TEKLİFLER</Nav.Link>
           </Nav.Item>

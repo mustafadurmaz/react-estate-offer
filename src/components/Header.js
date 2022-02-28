@@ -1,12 +1,15 @@
 import React from "react";
 import { Navbar, Container, Nav, Button, NavDropdown,ButtonGroup } from "react-bootstrap";
+import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { AiOutlineUser} from "react-icons/ai";
 
 function Header() {
   return (
     <>
-      <Navbar bg="light" variant="light">
+      <Navbar collapseOnSelect expand="sm" bg="light" variant="light">
         <Container>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav" >
           <Navbar.Brand href="/">GABORAS</Navbar.Brand>
           <Nav className="me-auto">
             <NavDropdown title="Piyasa" id="navbarScrollingDropdown">
@@ -37,6 +40,7 @@ function Header() {
               Kaydol
             </Button>
           </ButtonGroup>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
