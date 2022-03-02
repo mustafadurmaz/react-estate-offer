@@ -9,17 +9,22 @@ import Offers from "./Offers";
 import Form from "./Form";
 import axios from "axios";
 import { init, send, subscribe } from "../socketApi";
+import "./EstateDetail.css";
+import "./Header.css";
 
 function EstateDetail({ data, setIsActive }) {
-  // const [listOffer, setListOffer] = useState([]);
+  // const [offerList, setOfferList] = useState([]);
   const [socketData, setSocketData] = useState([]);
   const params = useParams();
 
-  socketData.sort(function (a, b) {
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
+  let offerList = [];
+  if (socketData) {
+    socketData.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
-  const offerList = socketData.filter((teklif) => teklif.id === Number(params.id));
+    offerList = socketData.filter((teklif) => teklif.id === Number(params.id));
+  }
 
   useEffect(() => {
     axios.get("http://localhost:3001/getoffers").then((response) => {
@@ -32,18 +37,19 @@ function EstateDetail({ data, setIsActive }) {
       });
     });
   }, []);
-  const dataList = data.estateList.filter((estate) => estate.id === Number(params.id));
+  const dataList = data.estateList.filter(
+    (estate) => estate.id === Number(params.id)
+  );
 
-  useEffect(()=>{
+  useEffect(() => {
     if (params) {
       setIsActive(false);
-    } 
+    }
 
     return () => {
       setIsActive(true);
-  }
-    
-  },[]);
+    };
+  }, []);
 
   const d = new Date();
   let year = d.getFullYear();
@@ -58,37 +64,36 @@ function EstateDetail({ data, setIsActive }) {
 
   return (
     <>
-      <Container>
-        <Card>
-          <Card.Body>
-            <Card.Text>
-              <IoMdArrowDropright />
-              Vitrin <IoMdArrowDropright />
-              {dataList[0].category} <IoMdArrowDropright />
-              {dataList[0].type} <IoMdArrowDropright />
-              {dataList[0].subcategory}
-            </Card.Text>
+      <Card>
+        <Card.Body>
+          <Card.Text id="cardmenu">
+            <IoMdArrowDropright />
+            Vitrin <IoMdArrowDropright />
+            {dataList[0].category} <IoMdArrowDropright />
+            {dataList[0].type} <IoMdArrowDropright />
+            {dataList[0].subcategory}
+          </Card.Text>
+          {offerList && <Form params={params} offerList={offerList} />}
 
-            <Form params={params} offerList={offerList} />
-            <Card.Title>
-              {dataList[0].neighborhood} {dataList[0].room}{" "}
-              {dataList[0].room && <span>Odalı</span>} {dataList[0].type}{" "}
-              {dataList[0].subcategory}{" "}
-            </Card.Title>
-          </Card.Body>
-        </Card>
-      </Container>
+          <Card.Title id="cardmenu">
+            {dataList[0].neighborhood} {dataList[0].room}{" "}
+            {dataList[0].room && <span>Odalı</span>} {dataList[0].type}{" "}
+            {dataList[0].subcategory}{" "}
+          </Card.Title>
+        </Card.Body>
+      </Card>
+
       <Container className="mt-3">
         <Row>
-          <Col sm={4}>
+          <Col id="listprice" sm={4}>
             <h2 className="fw-bold">{binlik(dataList[0].price)}₺</h2>
-            <p className="fw-bold" style={{ color: "#ED9D3D" }}>
+            <p className="fw-bold" style={{ color: "#d4ad67" }}>
               {dataList[0].province}/{dataList[0].district}/
               {dataList[0].neighborhood} /{dataList[0].block}-
               {dataList[0].parcel}
             </p>
-            <Table striped bordered hover size="sm">
-              <tbody style={{ fontSize: 14 }}>
+            <Table id="listdetail" bordered hover size="sm">
+              <tbody>
                 <tr>
                   <td className="fw-bold">İlan Tarihi</td>
                   <td>{timeConverter(dataList[0].postDate)}</td>
@@ -180,7 +185,7 @@ function EstateDetail({ data, setIsActive }) {
           </Col>
           <Col sm={8}>
             <Carousel>
-              {imageData.map((image,index) => (
+              {imageData.map((image, index) => (
                 <div key={image}>
                   <img src={image} alt={image} />
                 </div>
@@ -190,16 +195,28 @@ function EstateDetail({ data, setIsActive }) {
         </Row>
       </Container>
       <Container>
-        <Nav variant="pills" defaultActiveKey="#">
+        <Nav
+          style={{ backgroundColor: "#e6e9eb" }}
+          variant="pills"
+          defaultActiveKey="#"
+        >
           <Nav.Item>
-            <Nav.Link href="#">TEKLİFLER</Nav.Link>
+            <Nav.Link id="teklifbutton" href="#">
+              TEKLİFLER
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-1">KONUM</Nav.Link>
+            <Nav.Link
+              id="konumbutton"
+              style={{ color: "#002b49" }}
+              eventKey="link-1"
+            >
+              KONUM
+            </Nav.Link>
           </Nav.Item>
         </Nav>
       </Container>
-      <Offers params={params} offerList={offerList} />
+      {offerList && <Offers params={params} offerList={offerList} />}
     </>
   );
 }

@@ -8,8 +8,9 @@ import { binlik } from "./functions";
 function EstateList({ data }) {
   return (
     <>
-      <Container>
-        <h3>Vitrin</h3>
+      <div style={{backgroundColor:"#f8f8f8"}}>
+      <Container id="listcontainer">
+        <h3 id="title">Vitrin</h3>
 
         <Container fluid className="App py-2 overflow-hidden">
           <Row className="card-example d-flex flex-row flex-wrap">
@@ -17,17 +18,17 @@ function EstateList({ data }) {
               <Card
                 key={estate.id}
                 className="estates m-3"
-                style={{ width: "18rem" }}
+                style={{ width: "15rem" }}
               >
                 <Link to={`/estates/${estate.id}`}>
-                  <Card.Img variant="top" src={estate.img1} />
+                  <Card.Img className="imageList" variant="top" src={estate.img1} />
                 </Link>
                 <Card.Body>
-                  <Card.Title>{binlik(estate.price)}₺</Card.Title>
-                  <Card.Text>
-                    {estate.category}/{estate.subcategory}
+                  <Card.Title id="price" >{binlik(estate.price)}₺</Card.Title>
+                  <Card.Text id="category">
+                    {estate.category} / {estate.subcategory}
                     <br />
-                    <span style={{ fontSize: 12 }}>
+                    <span>
                       {estate.province}/{estate.district}/{estate.neighborhood}
                     </span>
                   </Card.Text>
@@ -40,6 +41,7 @@ function EstateList({ data }) {
           </Row>
         </Container>
       </Container>
+      </div>
     </>
   );
 }

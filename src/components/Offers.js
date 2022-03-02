@@ -8,10 +8,10 @@ import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 function Offers({ offerList }) {
   return (
     <>
-      <Container className="mt-5">
+      <Container className="mt-5 mb-5">
         <Table>
           <Thead>
-            <Tr>
+            <Tr style={{color:"#0067a0"}}> 
               <Th>Gönderen</Th>
               <Th>Email</Th>
               <Th>Telefon</Th>
@@ -21,7 +21,7 @@ function Offers({ offerList }) {
           </Thead>
           {offerList.map((offer) => (
             <Tbody key={offer._id}>
-              <Tr>
+              <Tr style={{color:"#002b49"}}>
                 <Td>
                   {offer.name} {offer.surname}
                 </Td>

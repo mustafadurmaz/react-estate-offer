@@ -21,7 +21,7 @@ function Form({ params, offerList }) {
       [event.target.name]: event.target.value,
     });
   };
-  
+
   const handleSubmit = (e) => {
     const offerObject = {
       id: params.id,
@@ -51,6 +51,7 @@ function Form({ params, offerList }) {
     <div className="App">
       <div className="container">
         <button
+          style={{ backgroundColor: "#0067a0" }}
           type="button"
           className="btn btn-primary float-end rounded-pill"
           data-bs-toggle="modal"
@@ -69,7 +70,10 @@ function Form({ params, offerList }) {
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title text-secondary" id="exampleModalLabel">
+                <h5
+                  className="modal-title text-secondary"
+                  id="exampleModalLabel"
+                >
                   İletişim Bilgileri
                 </h5>
                 <button
@@ -85,7 +89,6 @@ function Form({ params, offerList }) {
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                  
                       name="name"
                       value={form.name}
                       placeholder="Ad"
@@ -96,7 +99,6 @@ function Form({ params, offerList }) {
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-               
                       name="surname"
                       value={form.surname}
                       placeholder="Soyad"
@@ -108,7 +110,6 @@ function Form({ params, offerList }) {
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
                       type="email"
-             
                       name="email"
                       value={form.email}
                       placeholder="Eposta Adresi"
@@ -118,7 +119,6 @@ function Form({ params, offerList }) {
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                   
                       name="tel"
                       value={form.tel}
                       placeholder="Cep Telefonu"
@@ -130,7 +130,6 @@ function Form({ params, offerList }) {
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
                       type="text"
-                 
                       name="tutar"
                       value={form.tutar}
                       placeholder="Teklif Tutarı"

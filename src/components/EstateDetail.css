@@ -1,0 +1,24 @@
+#cardmenu{
+    margin-left: 60px;
+    color: #002b49;
+}
+
+#listprice{
+    color: #002b49;
+}
+
+#listdetail{
+    color: #002b49;
+    font-size: 13px;
+}
+
+#teklifbutton{
+    background-color: #002b4b;
+    border-radius: 20px;
+}
+
+#konumbutton{
+    background-color: #fff;
+    color:"#002b49";
+    border-radius: 20px;
+}

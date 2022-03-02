@@ -7,3 +7,35 @@
     top: 10px;
     right: 20px;
 }
+
+#price{
+    font-weight: bold;
+    font-size: 23px;
+    color:#002b49;
+}
+
+#category{
+    font-weight:normal;
+    font-size: 14px;
+    color:#002b49 ;
+}
+
+#category span{
+    font-weight:normal;
+    opacity: 0.7;
+    font-size: 11px;
+}
+
+#title{
+    color:#002b49 ;
+    font-weight: 400;
+    font-size: 22px;
+    padding-top: 25px;
+}
+
+#listcontainer{
+    background-color: #f8f8f8;
+}
+
+
+
