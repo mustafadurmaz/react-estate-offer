@@ -118,7 +118,7 @@ function Form({ params, offerList }) {
 
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
-                      type="text"
+                      type="number"
                       name="tel"
                       value={form.tel}
                       placeholder="Cep Telefonu"
@@ -129,7 +129,7 @@ function Form({ params, offerList }) {
                   <div className="mb-3 d-flex justify-content-around">
                     <input
                       className="min-vw-45 p-1 rounded-pill form-control"
-                      type="text"
+                      type="number"
                       name="tutar"
                       value={form.tutar}
                       placeholder="Teklif Tutarı"
